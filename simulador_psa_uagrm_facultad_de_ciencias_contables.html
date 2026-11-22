@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSA Virtual - Facultad de Ciencias Contables | UAGRM</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos estilo Moodle -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+            color: #1d2125;
+        }
+        /* Colores institucionales UAGRM y Facultad de Ciencias Contables */
+        .uagrm-blue { background-color: #003366; }
+        .uagrm-blue-hover:hover { background-color: #002244; }
+        .uagrm-red { background-color: #cc0000; }
+        .moodle-card {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .nav-grid-btn {
+            transition: all 0.15s ease-in-out;
+        }
+        .nav-grid-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- ========================================== -->
+    <!-- PANTALLA 1: LOGIN ESTILO MOODLE UAGRM      -->
+    <!-- ========================================== -->
+    <div id="login-screen" class="flex-grow flex items-center justify-center p-4 bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200">
+        <div class="moodle-card w-full max-w-md p-8 shadow-xl border-t-4 border-[#003366]">
+            <!-- Logo Institucional -->
+            <div class="flex flex-col items-center mb-6">
+                <div class="w-32 h-32 mb-3 flex items-center justify-center rounded-xl bg-white p-2 shadow-sm border border-gray-100">
+                    <img 
+                        src="https://virtual.uagrm.edu.bo/conava/fcascf/pluginfile.php/1/theme_boost_union/logocompact/300x300/1772459123/logo%20contaduria_Mesa%20de%20trabajo%201.png" 
+                        alt="Logo Facultad de Ciencias Contables UAGRM" 
+                        class="max-h-full max-w-full object-contain"
+                        onerror="this.onerror=null; this.src='https://placehold.co/200x200/003366/ffffff?text=UAGRM+FCC';"
+                    >
+                </div>
+                <h1 class="text-xl font-bold text-center text-[#003366] leading-tight">
+                    Universidad Autónoma Gabriel René Moreno
+                </h1>
+                <p class="text-sm font-medium text-gray-600 text-center mt-1">
+                    Facultad de Ciencias Contables, Auditoría, Sistemas de Control de Gestión y Finanzas
+                </p>
+                <span class="mt-2 inline-block bg-red-100 text-[#cc0000] text-xs font-bold px-3 py-1 rounded-full border border-red-200">
+                    Simulador Oficial PSA - Plataforma Virtual
+                </span>
+            </div>
+
+            <!-- Formulario de Acceso -->
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="applicant-name" class="block text-sm font-semibold text-gray-700 mb-1">
+                        <i class="fa-solid fa-user text-[#003366] mr-1"></i> Nombre del Postulante
+                    </label>
+                    <input 
+                        type="text" 
+                        id="applicant-name" 
+                        placeholder="Ej. Juan Pérez Mamani" 
+                        required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent text-sm"
+                    >
+                </div>
+
+                <div>
+                    <label for="applicant-password" class="block text-sm font-semibold text-gray-700 mb-1">
+                        <i class="fa-solid fa-lock text-[#003366] mr-1"></i> Contraseña / Código PSA
+                    </label>
+                    <input 
+                        type="password" 
+                        id="applicant-password" 
+                        placeholder="Ingrese su contraseña" 
+                        required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent text-sm"
+                    >
+                </div>
+
+                <div>
+                    <label for="career-select" class="block text-sm font-semibold text-gray-700 mb-1">
+                        <i class="fa-solid fa-graduation-cap text-[#003366] mr-1"></i> Carrera a la que postula
+                    </label>
+                    <select 
+                        id="career-select" 
+                        required
+                        class="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] bg-white text-sm"
+                    >
+                        <option value="" disabled selected>-- Seleccione su carrera --</option>
+                        <option value="Contaduría Pública">Contaduría Pública</option>
+                        <option value="Información y Control de Gestión">Información y Control de Gestión</option>
+                        <option value="Banca, Seguros y Valores">Banca, Seguros y Valores</option>
+                    </select>
+                </div>
+
+                <div class="pt-2">
+                    <button 
+                        type="submit" 
+                        class="w-full uagrm-blue uagrm-blue-hover text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
+                    >
+                        <span>Acceder e Iniciar Examen</span>
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-5 pt-4 border-t border-gray-200 text-xs text-gray-500 text-center space-y-1">
+                <p><i class="fa-solid fa-circle-info text-blue-600"></i> 40 preguntas (Matemática, Historia, Psicología y Lenguaje)</p>
+                <p><i class="fa-regular fa-clock text-red-600"></i> Tiempo límite: <strong>30 minutos</strong> | Nota mínima de aprobación: <strong>51/100</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA 2: ENTORNO DE EXAMEN MOODLE       -->
+    <!-- ========================================== -->
+    <div id="exam-screen" class="hidden flex-col min-h-screen">
+        <!-- Barra Superior Estilo Moodle Boost -->
+        <header class="bg-white border-b border-gray-300 sticky top-0 z-30 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+                <!-- Identidad Facultad -->
+                <div class="flex items-center gap-3">
+                    <img 
+                        src="https://virtual.uagrm.edu.bo/conava/fcascf/pluginfile.php/1/theme_boost_union/logocompact/300x300/1772459123/logo%20contaduria_Mesa%20de%20trabajo%201.png" 
+                        alt="Logo" 
+                        class="h-10 w-10 object-contain rounded"
+                        onerror="this.onerror=null; this.src='https://placehold.co/80x80/003366/ffffff?text=FCC';"
+                    >
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-[#003366] text-sm sm:text-base">PSA Virtual UAGRM</span>
+                            <span class="hidden sm:inline-block text-xs bg-blue-50 text-[#003366] px-2 py-0.5 rounded border border-blue-200 font-medium">Facultad de Ciencias Contables</span>
+                        </div>
+                        <p id="header-career-badge" class="text-xs font-semibold text-[#cc0000]">Carrera: -</p>
+                    </div>
+                </div>
+
+                <!-- Datos del Postulante y Temporizador -->
+                <div class="flex items-center gap-4 ml-auto">
+                    <div class="text-right hidden md:block">
+                        <p class="text-xs text-gray-500">Postulante</p>
+                        <p id="header-user-name" class="text-sm font-bold text-gray-800">-</p>
+                    </div>
+
+                    <!-- Caja de Temporizador Moodle -->
+                    <div id="timer-box" class="flex items-center gap-2 bg-red-50 border-2 border-[#cc0000] px-3 py-1.5 rounded-lg">
+                        <i class="fa-regular fa-clock text-[#cc0000] text-lg animate-pulse"></i>
+                        <div>
+                            <span class="block text-[10px] uppercase font-bold text-gray-600 leading-none">Tiempo restante</span>
+                            <span id="timer-display" class="font-mono font-bold text-base sm:text-lg text-[#cc0000] leading-tight">30:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sub-barra móvil para mostrar nombre de usuario -->
+            <div class="md:hidden bg-slate-100 px-4 py-1.5 border-t border-gray-200 flex justify-between items-center text-xs">
+                <span class="text-gray-600">Postulante: <strong id="mobile-user-name" class="text-gray-900">-</strong></span>
+                <span id="mobile-progress-text" class="font-semibold text-[#003366]">0/40 respondidas</span>
+            </div>
+        </header>
+
+        <!-- Breadcrumb Moodle -->
+        <div class="max-w-7xl w-full mx-auto px-4 pt-4">
+            <div class="moodle-card p-3 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm text-gray-600">
+                <div class="flex items-center gap-2">
+                    <span class="text-[#003366] font-medium">Área personal</span>
+                    <span>/</span>
+                    <span>Admisión PSA</span>
+                    <span>/</span>
+                    <span class="font-semibold text-gray-900">Cuestionario de Evaluación (40 Preguntas)</span>
+                </div>
+                <div id="mode-indicator" class="font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">
+                    <i class="fa-solid fa-pen-to-square mr-1"></i> En curso
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido Principal: Grid de Pregunta + Navegación del Cuestionario -->
+        <main class="max-w-7xl w-full mx-auto px-4 py-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            
+            <!-- Columna Izquierda/Central: Pregunta Actual (8 cols en desktop) -->
+            <section class="lg:col-span-8 space-y-4">
+                <!-- Banner de Resultados (Solo visible al finalizar) -->
+                <div id="results-banner" class="hidden moodle-card p-6 border-l-8">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <span id="result-status-badge" class="inline-block text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full mb-2"></span>
+                            <h2 class="text-xl sm:text-2xl font-bold text-gray-900" id="result-title">Resumen de Calificación</h2>
+                            <p class="text-sm text-gray-600 mt-1" id="result-subtitle"></p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center min-w-[150px]">
+                            <span class="block text-xs font-semibold text-gray-500 uppercase">Calificación Final</span>
+                            <span id="result-score" class="text-3xl font-extrabold text-[#003366]">0.00</span>
+                            <span class="text-sm font-bold text-gray-500"> / 100</span>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas detalladas -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-4 border-t border-gray-200 text-center">
+                        <div class="bg-emerald-50 p-2.5 rounded-lg border border-emerald-100">
+                            <span class="block text-xs text-emerald-700 font-medium">Correctas</span>
+                            <span id="stat-correct" class="text-lg font-bold text-emerald-800">0</span>
+                        </div>
+                        <div class="bg-red-50 p-2.5 rounded-lg border border-red-100">
+                            <span class="block text-xs text-red-700 font-medium">Incorrectas</span>
+                            <span id="stat-incorrect" class="text-lg font-bold text-red-800">0</span>
+                        </div>
+                        <div class="bg-gray-100 p-2.5 rounded-lg border border-gray-200">
+                            <span class="block text-xs text-gray-600 font-medium">Sin responder</span>
+                            <span id="stat-unanswered" class="text-lg font-bold text-gray-800">0</span>
+                        </div>
+                        <div class="bg-blue-50 p-2.5 rounded-lg border border-blue-100">
+                            <span class="block text-xs text-blue-700 font-medium">Nota Mínima</span>
+                            <span class="text-lg font-bold text-blue-900">51.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Revisión -->
+                    <div class="mt-5 flex flex-wrap gap-3 justify-between items-center">
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="setReviewMode('single')" id="btn-review-single" class="px-4 py-2 rounded-lg text-sm font-semibold bg-[#003366] text-white shadow-sm">
+                                <i class="fa-solid fa-magnifying-glass mr-1"></i> Revisar pregunta por pregunta
+                            </button>
+                            <button onclick="setReviewMode('all')" id="btn-review-all" class="px-4 py-2 rounded-lg text-sm font-semibold bg-white text-[#003366] border border-[#003366] hover:bg-blue-50">
+                                <i class="fa-solid fa-list-check mr-1"></i> Ver todas las respuestas juntas
+                            </button>
+                        </div>
+                        <button onclick="restartSimulator()" class="px-4 py-2 rounded-lg text-sm font-semibold bg-gray-200 text-gray-800 hover:bg-gray-300">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Nuevo Intento
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contenedor de Vista Individual (Moodle Question Layout) -->
+                <div id="single-question-container" class="flex flex-col md:flex-row gap-4">
+                    <!-- Cuadro lateral izquierdo de estado de pregunta (Clásico de Moodle) -->
+                    <div class="moodle-card p-3.5 md:w-44 shrink-0 bg-[#f8f9fa] flex md:flex-col justify-between md:justify-start gap-2">
+                        <div>
+                            <h3 class="text-base font-bold text-gray-800">
+                                Pregunta <span id="q-number" class="text-lg text-[#003366]">1</span>
+                            </h3>
+                            <p id="q-status-text" class="text-xs text-gray-600 mt-1">Sin responder aún</p>
+                        </div>
+                        <div class="text-xs text-gray-600 md:mt-2 md:pt-2 md:border-t md:border-gray-200">
+                            <p>Puntúa como <strong>2.50</strong></p>
+                            <span id="q-subject-badge" class="inline-block mt-2 px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-900">
+                                Matemática
+                            </span>
+                        </div>
+                        <button id="btn-flag-question" onclick="toggleFlagCurrent()" class="mt-1 md:mt-3 text-xs flex items-center gap-1.5 text-gray-600 hover:text-red-600 font-medium">
+                            <i id="flag-icon" class="fa-regular fa-flag"></i>
+                            <span id="flag-text">Marcar pregunta</span>
+                        </button>
+                    </div>
+
+                    <!-- Caja Celeste de Enunciado y Opciones (Clásico de Moodle) -->
+                    <div class="moodle-card flex-grow overflow-hidden">
+                        <div class="bg-[#e7f3f5] border-b border-[#bce0e6] p-5">
+                            <p id="q-text" class="text-gray-900 font-medium text-base leading-relaxed">
+                                Cargando pregunta...
+                            </p>
+                        </div>
+
+                        <div class="p-5 bg-white">
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Seleccione una:</p>
+                            <div id="options-list" class="space-y-2.5">
+                                <!-- Opciones generadas dinámicamente -->
+                            </div>
+
+                            <!-- Retroalimentación en modo revisión -->
+                            <div id="single-feedback-box" class="hidden mt-5 p-4 rounded-lg border text-sm">
+                                <!-- Contenido dinámico de retroalimentación -->
+                            </div>
+
+                            <!-- Limpiar selección -->
+                            <div id="clear-choice-wrapper" class="mt-4">
+                                <button onclick="clearCurrentAnswer()" class="text-xs text-[#003366] hover:underline font-medium">
+                                    <i class="fa-solid fa-eraser mr-1"></i> Quitar mi elección
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenedor de Vista Completa de Revisión (Todas las 40 preguntas) -->
+                <div id="all-questions-review-container" class="hidden space-y-4">
+                    <!-- Se llena dinámicamente al finalizar si el usuario elige ver todas -->
+                </div>
+
+                <!-- Botones de Navegación Anterior / Siguiente -->
+                <div id="pagination-controls" class="flex items-center justify-between pt-2">
+                    <button id="btn-prev" onclick="prevQuestion()" class="px-4 py-2.5 rounded-lg bg-white border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Página anterior
+                    </button>
+                    <span class="text-xs font-medium text-gray-500">
+                        Pregunta <span id="footer-q-current">1</span> de 40
+                    </span>
+                    <button id="btn-next" onclick="nextQuestion()" class="px-4 py-2.5 rounded-lg uagrm-blue uagrm-blue-hover text-white font-semibold text-sm shadow-sm">
+                        Siguiente página <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Columna Derecha: Bloque Navegación por el Cuestionario (4 cols en desktop) -->
+            <aside class="lg:col-span-4 moodle-card p-4 sticky top-20">
+                <div class="border-b border-gray-200 pb-2.5 mb-3 flex items-center justify-between">
+                    <h3 class="font-bold text-gray-800 text-sm">
+                        <i class="fa-solid fa-table-cells text-[#003366] mr-1.5"></i> Navegación por el cuestionario
+                    </h3>
+                    <span id="answered-counter" class="text-xs font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">0 / 40</span>
+                </div>
+
+                <!-- Leyenda de Materias -->
+                <div class="grid grid-cols-2 gap-1.5 text-[11px] text-gray-600 mb-3 bg-slate-50 p-2 rounded border border-slate-200">
+                    <div><strong>1 - 10:</strong> Matemática</div>
+                    <div><strong>11 - 20:</strong> Historia</div>
+                    <div><strong>21 - 30:</strong> Psicología</div>
+                    <div><strong>31 - 40:</strong> Lenguaje</div>
+                </div>
+
+                <!-- Matriz de 40 Botones Estilo Moodle -->
+                <div id="question-nav-grid" class="grid grid-cols-8 sm:grid-cols-10 lg:grid-cols-8 gap-1.5 mb-4">
+                    <!-- 40 botones generados por JS -->
+                </div>
+
+                <!-- Leyenda de Estados -->
+                <div class="flex flex-wrap gap-3 text-[11px] text-gray-600 border-t border-gray-200 pt-3 mb-4">
+                    <div class="flex items-center gap-1">
+                        <span class="w-3.5 h-3.5 inline-block border border-gray-400 bg-white rounded-sm"></span> Sin responder
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-3.5 h-3.5 inline-block border border-gray-600 bg-gray-600 rounded-sm"></span> Respondida
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="w-3.5 h-3.5 inline-block border border-red-600 bg-white relative rounded-sm">
+                            <span class="absolute top-0 right-0 w-1.5 h-1.5 bg-red-600"></span>
+                        </span> Marcada
+                    </div>
+                </div>
+
+                <!-- Botón Terminar Intento -->
+                <div id="finish-attempt-box">
+                    <button onclick="openConfirmModal()" class="w-full py-2.5 px-4 rounded-lg bg-[#cc0000] hover:bg-red-800 text-white font-bold text-sm shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Terminar intento...</span>
+                    </button>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL PERSONALIZADO (SIN ALERT/CONFIRM)    -->
+    <!-- ========================================== -->
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl border border-gray-200">
+            <div class="flex items-center gap-3 mb-3">
+                <div id="modal-icon-container" class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 id="modal-title" class="text-lg font-bold text-gray-900">Confirmar envío del examen</h3>
+            </div>
+            <p id="modal-message" class="text-sm text-gray-600 leading-relaxed mb-5">
+                Una vez que haga el envío, no podrá cambiar sus respuestas de este intento.
+            </p>
+            <div id="modal-actions" class="flex justify-end gap-2.5">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50">
+                    Volver al intento
+                </button>
+                <button onclick="submitExam(false)" class="px-4 py-2 rounded-lg bg-[#003366] text-white font-semibold text-sm hover:bg-[#002244]">
+                    Enviar todo y terminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-[#002244] text-white/80 text-xs py-4 px-4 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+            <p>© Universidad Autónoma Gabriel René Moreno (UAGRM) - Santa Cruz de la Sierra, Bolivia.</p>
+            <p>Facultad de Ciencias Contables | Plataforma de Admisión PSA</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- LÓGICA Y BANCO DE 40 PREGUNTAS PSA         -->
+    <!-- ========================================== -->
+    <script>
+        /**
+         * Banco de 40 Preguntas de Nivel Universitario (PSA UAGRM)
+         * Distribuidas en 4 áreas:
+         * - 1 a 10: Matemática
+         * - 11 a 20: Historia
+         * - 21 a 30: Psicología
+         * - 31 a 40: Lenguaje
+         */
+        const questionsBank = [
+            // ================= MATEMÁTICA (1 - 10) =================
+            {
+                id: 1,
+                subject: "Matemática",
+                question: "Si log₂(x - 1) + log₂(x + 1) = 3, ¿cuál es el valor real positivo de x que satisface la ecuación logarítmica?",
+                options: ["x = 2", "x = 3", "x = 4", "x = √7"],
+                correct: 1,
+                explanation: "Aplicando propiedades de logaritmos: log₂((x - 1)(x + 1)) = 3 → x² - 1 = 2³ → x² - 1 = 8 → x² = 9 → x = 3 (se descarta -3 por dominio)."
+            },
+            {
+                id: 2,
+                subject: "Matemática",
+                question: "En una progresión aritmética, el cuarto término es 14 y el décimo término es 32. ¿Cuál es la suma de los primeros 15 términos?",
+                options: ["360", "390", "415", "450"],
+                correct: 1,
+                explanation: "d = (32 - 14)/(10 - 4) = 18/6 = 3. El primer término a₁ = 14 - 3(3) = 5. El término 15 es a₁₅ = 5 + 14(3) = 47. S₁₅ = (5 + 47)·15 / 2 = 390."
+            },
+            {
+                id: 3,
+                subject: "Matemática",
+                question: "Al factorizar completamente el polinomio P(x) = x³ - 6x² + 11x - 6, ¿cuáles son sus raíces reales?",
+                options: ["1, -2, 3", "-1, -2, -3", "1, 2, 3", "2, 3, 6"],
+                correct: 2,
+                explanation: "Por Ruffini o teorema del factor, P(1) = 1 - 6 + 11 - 6 = 0. Al dividir entre (x - 1) queda x² - 5x + 6 = (x - 2)(x - 3). Las raíces son 1, 2 y 3."
+            },
+            {
+                id: 4,
+                subject: "Matemática",
+                question: "Un capital de Bs. 10.000 se invierte a una tasa de interés compuesto anual del 10% capitalizable anualmente. ¿Cuál será el monto acumulado al cabo de 2 años?",
+                options: ["Bs. 12.000", "Bs. 12.100", "Bs. 11.200", "Bs. 12.500"],
+                correct: 1,
+                explanation: "M = C(1 + i)ⁿ = 10.000(1 + 0.10)² = 10.000(1.21) = Bs. 12.100."
+            },
+            {
+                id: 5,
+                subject: "Matemática",
+                question: "Determine el conjunto solución de la inecuación cuadrática: x² - 5x - 14 > 0.",
+                options: ["(-2, 7)", "(-∞, -2) ∪ (7, +∞)", "(-∞, -7) ∪ (2, +∞)", "[-2, 7]"],
+                correct: 1,
+                explanation: "Factorizando: (x - 7)(x + 2) > 0. Los puntos críticos son -2 y 7. Para que el producto sea positivo, x ∈ (-∞, -2) ∪ (7, +∞)."
+            },
+            {
+                id: 6,
+                subject: "Matemática",
+                question: "Si sen(α) = 3/5 y α pertenece al segundo cuadrante, ¿cuál es el valor exacto de cos(α) + tan(α)?",
+                options: ["-31/20", "1/20", "-17/20", "31/20"],
+                correct: 0,
+                explanation: "En el II cuadrante, coseno y tangente son negativos: cos(α) = -4/5 y tan(α) = -3/4. Suma: -4/5 + (-3/4) = (-16 - 15)/20 = -31/20."
+            },
+            {
+                id: 7,
+                subject: "Matemática",
+                question: "¿Cuál es la ecuación de la recta que pasa por el punto P(2, -3) y es perpendicular a la recta 2x - 4y + 7 = 0?",
+                options: ["2x + y - 1 = 0", "x - 2y - 8 = 0", "2x - y - 7 = 0", "x + 2y + 4 = 0"],
+                correct: 0,
+                explanation: "La pendiente dada es m₁ = -2/(-4) = 1/2. La pendiente perpendicular es m₂ = -2. Ecuación: y - (-3) = -2(x - 2) → y + 3 = -2x + 4 → 2x + y - 1 = 0."
+            },
+            {
+                id: 8,
+                subject: "Matemática",
+                question: "Simplifique la siguiente expresión algebraica racional para x ≠ ±3: (x² - 9) / (x² - 6x + 9).",
+                options: ["(x - 3)/(x + 3)", "(x + 3)/(x - 3)", "1", "(x + 3)²"],
+                correct: 1,
+                explanation: "Numerador: diferencia de cuadrados (x - 3)(x + 3). Denominador: trinomio cuadrado perfecto (x - 3)². Simplificando (x - 3) queda (x + 3)/(x - 3)."
+            },
+            {
+                id: 9,
+                subject: "Matemática",
+                question: "El determinante de la matriz A = [[3, -2], [4, x]] es igual a 20. ¿Cuál es el valor de x?",
+                options: ["4", "6", "-4", "9.33"],
+                correct: 0,
+                explanation: "det(A) = (3)(x) - (-2)(4) = 3x + 8 = 20 → 3x = 12 → x = 4."
+            },
+            {
+                id: 10,
+                subject: "Matemática",
+                question: "¿De cuántas maneras distintas se pueden ordenar las letras de la palabra 'CONTABLE' sin repetir ninguna letra?",
+                options: ["5.040", "40.320", "362.880", "720"],
+                correct: 1,
+                explanation: "La palabra 'CONTABLE' tiene 8 letras distintas. El número de permutaciones es 8! = 8 × 7 × 6 × 5 × 4 × 3 × 2 × 1 = 40.320."
+            },
+
+            // ================= HISTORIA (11 - 20) =================
+            {
+                id: 11,
+                subject: "Historia",
+                question: "¿En qué fecha y lugar se fundó por primera vez la ciudad de Santa Cruz de la Sierra por el capitán Ñuflo de Chaves?",
+                options: ["24 de septiembre de 1810, a orillas del río Piraí", "26 de febrero de 1561, a orillas del arroyo Sutós", "6 de agosto de 1825, en la serranía de Chiquitos", "15 de febrero de 1560, en Cotoca"],
+                correct: 1,
+                explanation: "Ñuflo de Chaves fundó Santa Cruz de la Sierra el 26 de febrero de 1561 a orillas del arroyo Sutós, en las serranías de Chiquitos (actual San José de Chiquitos)."
+            },
+            {
+                id: 12,
+                subject: "Historia",
+                question: "¿Cuál fue la principal causa económica inmediata que desencadenó la Guerra del Pacífico entre Bolivia y Chile en 1879?",
+                options: ["La nacionalización de las minas de plata de Potosí", "El impuesto de los 10 centavos por quintal de salitre exportado por la Compañía de Salitres y Ferrocarril de Antofagasta", "La disputa por las reservas de gas natural en Tarija", "El cierre del puerto de Arica al comercio peruano"],
+                correct: 1,
+                explanation: "El gobierno de Hilarión Daza decretó en 1878 un impuesto de 10 centavos por quintal de salitre exportado, vulnerando según Chile el Tratado de 1874."
+            },
+            {
+                id: 13,
+                subject: "Historia",
+                question: "El 'Memorándum de 1904', redactado por la Sociedad de Estudios Geográficos e Históricos de Santa Cruz, planteaba fundamentalmente:",
+                options: ["La anexión de Santa Cruz al Brasil", "La integración ferroviaria del oriente con el occidente boliviano y el desarrollo económico nacional", "La creación de un banco central exclusivo para el oriente", "La abolición de la reforma agraria en los llanos"],
+                correct: 1,
+                explanation: "El Memorándum de 1904 reclamaba la construcción de vías férreas que conectaran el oriente productor con los centros de consumo del occidente del país."
+            },
+            {
+                id: 14,
+                subject: "Historia",
+                question: "¿Qué medida estructural NO formó parte de las grandes transformaciones de la Revolución Nacional de 1952 en Bolivia?",
+                options: ["La Nacionalización de las Minas (COMIBOL)", "El Voto Universal", "La Reforma Agraria de 1953", "La Capitalización de las empresas estratégicas (YPFB, ENTEL, ENDE)"],
+                correct: 3,
+                explanation: "La Capitalización fue una política neoliberal aplicada en la década de 1990 (gobierno de Gonzalo Sánchez de Lozada), no en la Revolución de 1952."
+            },
+            {
+                id: 15,
+                subject: "Historia",
+                question: "¿Durante qué presidencia fue fundada la Universidad Autónoma Gabriel René Moreno (originalmente Universidad Santo Tomás de Aquino) en 1879?",
+                options: ["Mariano Melgarejo", "Hilarión Daza", "Narciso Campero", "Andrés de Santa Cruz"],
+                correct: 1,
+                explanation: "Fue creada mediante Decreto Supremo del 15 de diciembre de 1879 durante el gobierno del Gral. Hilarión Daza, inaugurándose el 11 de enero de 1880."
+            },
+            {
+                id: 16,
+                subject: "Historia",
+                question: "La Guerra del Chaco (1932-1935) enfrentó a Bolivia y Paraguay. ¿Cuál fue una de las consecuencias sociopolíticas más trascendentales para Bolivia tras este conflicto?",
+                options: ["La consolidación definitiva de la oligarquía minera tradicional", "El surgimiento de una nueva conciencia nacionalista y generacional que cuestionó el orden oligárquico", "La obtención de una salida soberana al océano Atlántico", "La inmediata industrialización petrolera del altiplano"],
+                correct: 1,
+                explanation: "La convivencia en las trincheras de indígenas, obreros y clases medias generó la llamada 'Generación del Chaco', base de las reformas sociales posteriores."
+            },
+            {
+                id: 17,
+                subject: "Historia",
+                question: "¿Qué decreto supremo promulgado en agosto de 1985 detuvo la hiperinflación en Bolivia e instauró la Nueva Política Económica (NPE)?",
+                options: ["Decreto Supremo 21060", "Decreto Supremo 3464", "Decreto Supremo 28701", "Decreto Supremo 1565"],
+                correct: 0,
+                explanation: "El D.S. 21060, promulgado durante el cuarto gobierno de Víctor Paz Estenssoro, estabilizó la moneda, liberalizó el mercado y frenó la hiperinflación."
+            },
+            {
+                id: 18,
+                subject: "Historia",
+                question: "En la historia universal contemporánea, ¿qué acontecimiento marcó el fin simbólico de la Guerra Fría en noviembre de 1989?",
+                options: ["La Crisis de los Misiles en Cuba", "La caída del Muro de Berlín", "La firma del Tratado de Versalles", "La Revolución Bolchevique"],
+                correct: 1,
+                explanation: "La caída del Muro de Berlín el 9 de noviembre de 1989 simbolizó el colapso del bloque soviético en Europa del Este y el fin de la Guerra Fría."
+            },
+            {
+                id: 19,
+                subject: "Historia",
+                question: "¿Quién lideró la junta revolucionaria en Santa Cruz de la Sierra el 24 de septiembre de 1810, junto a Antonio Vicente Seoane y José Andrés Salvatierra?",
+                options: ["Ignacio Warnes", "José Manuel Mercado 'El Colorao'", "Antonio Suárez", "Andrés Ibáñez"],
+                correct: 2,
+                explanation: "El Cabildo Abierto del 24 de septiembre de 1810 conformó la Junta Provisoria integrada por Antonio Vicente Seoane, Antonio Suárez y el padre José Andrés Salvatierra."
+            },
+            {
+                id: 20,
+                subject: "Historia",
+                question: "¿Qué tratado internacional de 1903 puso fin a la Guerra del Acre entre Bolivia y Brasil?",
+                options: ["Tratado de Ancón", "Tratado de Petrópolis", "Tratado de Paz y Amistad de 1904", "Protocolo de Paz de Buenos Aires"],
+                correct: 1,
+                explanation: "El Tratado de Petrópolis (17 de noviembre de 1903) cedió el territorio del Acre al Brasil a cambio de compensaciones territoriales, 2 millones de libras esterlinas y el ferrocarril Madeira-Mamoré."
+            },
+
+            // ================= PSICOLOGÍA (21 - 30) =================
+            {
+                id: 21,
+                subject: "Psicología",
+                question: "Según la teoría psicosexual y estructural de la personalidad de Sigmund Freud, ¿qué instancia psíquica opera bajo el 'principio de realidad' y media entre los impulsos y las normas sociales?",
+                options: ["El Ello (Id)", "El Yo (Ego)", "El Superyó (Superego)", "El Inconsciente Colectivo"],
+                correct: 1,
+                explanation: "El Yo (Ego) se rige por el principio de realidad, equilibrando las demandas instintivas del Ello (principio de placer) y las exigencias morales del Superyó."
+            },
+            {
+                id: 22,
+                subject: "Psicología",
+                question: "En la teoría del desarrollo cognitivo de Jean Piaget, ¿en qué etapa el individuo adquiere la capacidad del pensamiento abstracto, hipotético-deductivo y proposicional?",
+                options: ["Etapa sensoriomotriz", "Etapa preoperacional", "Etapa de las operaciones concretas", "Etapa de las operaciones formales"],
+                correct: 3,
+                explanation: "A partir de los 11-12 años (operaciones formales), el adolescente desarrolla el razonamiento abstracto, lógico-formal e hipotético-deductivo."
+            },
+            {
+                id: 23,
+                subject: "Psicología",
+                question: "En el condicionamiento operante formulado por B.F. Skinner, ¿en qué consiste el 'reforzamiento negativo'?",
+                options: ["Aplicar un castigo físico para eliminar una conducta indeseada", "Aumentar la probabilidad de una conducta mediante la retirada de un estímulo aversivo", "Disminuir una conducta ignorándola completamente", "Asociar un estímulo neutro con un estímulo incondicionado"],
+                correct: 1,
+                explanation: "Todo reforzamiento aumenta la frecuencia de una conducta. Es 'negativo' porque se sustrae o evita un estímulo desagradable (ej. tomar un analgésico para quitar el dolor)."
+            },
+            {
+                id: 24,
+                subject: "Psicología",
+                question: "De acuerdo con la pirámide de la jerarquía de necesidades de Abraham Maslow, ¿cuál es el nivel más alto del desarrollo humano que se alcanza tras satisfacer las necesidades básicas y psicológicas?",
+                options: ["Necesidades de seguridad", "Necesidades de afiliación y afecto", "Necesidades de estima y reconocimiento", "Autorrealización"],
+                correct: 3,
+                explanation: "En la cúspide de la pirámide de Maslow se encuentra la autorrealización: el desarrollo pleno del potencial personal, creatividad y sentido de propósito."
+            },
+            {
+                id: 25,
+                subject: "Psicología",
+                question: "¿Cómo se denomina el proceso cognitivo superior mediante el cual codificamos, almacenamos y recuperamos información previamente aprendida?",
+                options: ["Sensación", "Memoria", "Percepción subliminal", "Atención dividida"],
+                correct: 1,
+                explanation: "La memoria comprende tres fases fundamentales: codificación (registro), almacenamiento (retención) y recuperación (evocación)."
+            },
+            {
+                id: 26,
+                subject: "Psicología",
+                question: "Lev Vygotsky introdujo un concepto clave para explicar el aprendizaje sociocultural, definido como la distancia entre lo que el estudiante puede hacer solo y lo que puede lograr con ayuda de un guía. ¿Cuál es ese concepto?",
+                options: ["Zona de Desarrollo Próximo (ZDP)", "Condicionamiento Vicario", "Disonancia Cognitiva", "Inteligencia Emocional"],
+                correct: 0,
+                explanation: "La Zona de Desarrollo Próximo (ZDP) representa el potencial de aprendizaje mediado por la interacción social y el andamiaje."
+            },
+            {
+                id: 27,
+                subject: "Psicología",
+                question: "¿Qué estructura del sistema nervioso central es fundamental en la regulación de las respuestas emocionales como el miedo y la ira, formando parte del sistema límbico?",
+                options: ["El cerebelo", "La amígdala cerebral", "El bulbo raquídeo", "El cuerpo calloso"],
+                correct: 1,
+                explanation: "La amígdala cerebral es el centro neural clave en el procesamiento emocional, la detección de amenazas y el condicionamiento del miedo."
+            },
+            {
+                id: 28,
+                subject: "Psicología",
+                question: "Según Daniel Goleman, ¿cuál de los siguientes componentes NO pertenece a las dimensiones de la Inteligencia Emocional?",
+                options: ["Autorregulación emocional", "Empatía", "Coeficiente intelectual lógico-matemático", "Habilidades sociales"],
+                correct: 2,
+                explanation: "El coeficiente intelectual lógico-matemático mide habilidades cognitivas tradicionales (CI), mientras que la inteligencia emocional abarca autoconciencia, autorregulación, motivación, empatía y habilidades sociales."
+            },
+            {
+                id: 29,
+                subject: "Psicología",
+                question: "Cuando una persona justifica un fracaso financiero inventando excusas lógicamente aceptables para proteger su autoestima y evitar la ansiedad, ¿qué mecanismo de defensa freudiano está utilizando?",
+                options: ["Proyección", "Racionalización", "Sublimación", "Regresión"],
+                correct: 1,
+                explanation: "La racionalización consiste en elaborar explicaciones aparentemente lógicas o moralmente aceptables para encubrir los verdaderos motivos o el fracaso."
+            },
+            {
+                id: 30,
+                subject: "Psicología",
+                question: "La escuela psicológica de la Gestalt sostiene respecto a la percepción humana que:",
+                options: ["La mente es una tabula rasa que solo responde a reflejos", "El todo es diferente y mayor que la suma de sus partes", "Solo debe estudiarse la conducta observable en laboratorio", "Todos los trastornos provienen de traumas infantiles reprimidos"],
+                correct: 1,
+                explanation: "La psicología de la Gestalt enfatiza que el cerebro organiza los estímulos sensoriales en configuraciones globales significativas ('el todo es más que la suma de las partes')."
+            },
+
+            // ================= LENGUAJE (31 - 40) =================
+            {
+                id: 31,
+                subject: "Lenguaje",
+                question: "Identifique la oración que presenta una acentuación ortográfica y diacrítica 100% correcta según las normas de la RAE:",
+                options: ["Aún no sé si él te dará el sí para el examen de auditoría.", "Aun no se si el te dará el si para el exámen de auditoría.", "Aún no sé si el te dara el sí para el examen de auditoria.", "Aun no sé si él té dará el sí para el examen de auditoría."],
+                correct: 0,
+                explanation: "'Aún' (todavía), 'sé' (verbo saber), 'él' (pronombre), 'te' (pronombre átono, sin tilde), 'sí' (adverbio de afirmación) y 'examen' (llana terminada en n, sin tilde) están correctamente escritos."
+            },
+            {
+                id: 32,
+                subject: "Lenguaje",
+                question: "En el circuito de la comunicación propuesto por Roman Jakobson, ¿qué función del lenguaje predomina en un informe financiero o estado contable que transmite datos objetivos?",
+                options: ["Función emotiva o expresiva", "Función poética o estética", "Función referencial o representativa", "Función fática o de contacto"],
+                correct: 2,
+                explanation: "La función referencial se centra en el contexto o referente, transmitiendo información objetiva, verificable y libre de subjetividad."
+            },
+            {
+                id: 33,
+                subject: "Lenguaje",
+                question: "¿Qué vicio de dicción o construcción sintáctica se comete en la siguiente expresión: 'Subir para arriba los balances generales'?",
+                options: ["Anfibología", "Pleonasmo o redundancia", "Barbarismo", "Solecismo de concordancia"],
+                correct: 1,
+                explanation: "El pleonasmo o redundancia consiste en emplear vocablos innecesarios que repiten una idea ya contenida en el verbo ('subir' ya implica ir hacia arriba)."
+            },
+            {
+                id: 34,
+                subject: "Lenguaje",
+                question: "Determine la función sintáctica del segmento subrayado en la oración: 'El auditor entregó el dictamen final [a los accionistas]'.",
+                options: ["Complemento Directo (CD)", "Complemento Indirecto (CI)", "Complemento Agente", "Atributo"],
+                correct: 1,
+                explanation: "'A los accionistas' designa al destinatario de la acción verbal y puede sustituirse por el pronombre 'les' ('El auditor les entregó el dictamen final'), por lo que es Complemento Indirecto."
+            },
+            {
+                id: 35,
+                subject: "Lenguaje",
+                question: "¿Cuál es el sinónimo contextual más preciso de la palabra 'INEXORABLE' en la frase: 'El vencimiento del plazo tributario es inexorable'?",
+                options: ["Flexible", "Inevitable", "Postergable", "Ambiguo"],
+                correct: 1,
+                explanation: "Inexorable significa que no se puede evitar, eludir ni detener con ruegos; su sinónimo directo es inevitable o ineludible."
+            },
+            {
+                id: 36,
+                subject: "Lenguaje",
+                question: "Señale la opción que contiene exclusivamente palabras graves (llanas) que llevan tilde por normativa ortográfica:",
+                options: ["Árbol, cáncer, fácil, lápiz", "Compás, café, camión, menú", "Brújula, médico, sábado, régimen", "Examen, margen, crisis, tesis"],
+                correct: 0,
+                explanation: "'Árbol', 'cáncer', 'fácil' y 'lápiz' son palabras graves/llanas que llevan tilde porque no terminan en vocal, ni en 'n', ni en 's'."
+            },
+            {
+                id: 37,
+                subject: "Lenguaje",
+                question: "Complete el siguiente enunciado con los conectores lógicos adecuados: 'La empresa incrementó sus ingresos operativos; __________, sus costos financieros también crecieron, __________ la utilidad neta se mantuvo estable.'",
+                options: ["por lo tanto - ya que", "sin embargo - por consiguiente", "además - aunque", "es decir - puesto que"],
+                correct: 1,
+                explanation: "El primer conector introduce una oposición o contraste ('sin embargo') y el segundo expresa una consecuencia lógica ('por consiguiente')."
+            },
+            {
+                id: 38,
+                subject: "Lenguaje",
+                question: "En la oración compuesta: 'Quienes aprueben el PSA ingresarán a la Facultad de Ciencias Contables', la proposición subordinada 'Quienes aprueben el PSA' funciona como:",
+                options: ["Subordinada adverbial de lugar", "Subordinada sustantiva en función de sujeto", "Subordinada adjetiva explicativa", "Coordinada adversativa"],
+                correct: 1,
+                explanation: "La subordinada relativa sin antecedente expreso ('Quienes aprueben el PSA') equivale a un sintagma nominal ('Ellos') y desempeña la función de sujeto del verbo 'ingresarán'."
+            },
+            {
+                id: 39,
+                subject: "Lenguaje",
+                question: "¿Cuál es la relación analógica correcta para: 'BALANZA : JUSTICIA ::' ?",
+                options: ["Termómetro : Fiebre", "Antorcha : Libertad", "Libro : Librería", "Martillo : Clavo"],
+                correct: 1,
+                explanation: "Relación de símbolo a concepto abstracto representado: así como la balanza simboliza la justicia, la antorcha simboliza la libertad."
+            },
+            {
+                id: 40,
+                subject: "Lenguaje",
+                question: "Elija la opción donde se emplea correctamente el signo de puntuación (punto y coma) para separar proposiciones yuxtapuestas con relación semántica:",
+                options: ["Los estudiantes de Contaduría revisaron los libros diarios; los de Finanzas analizaron la bolsa de valores.", "Compramos; bolígrafos, calculadoras, hojas y carpetas.", "Si estudias con disciplina; aprobarás el examen.", "El decano; inauguró el año académico."],
+                correct: 0,
+                explanation: "El punto y coma se utiliza correctamente para unir dos oraciones sintácticamente independientes pero estrechamente relacionadas por el sentido."
+            }
+        ];
+
+        // ==========================================
+        // ESTADO GLOBAL DEL SIMULADOR
+        // ==========================================
+        let userState = {
+            name: "",
+            career: ""
+        };
+
+        let examState = {
+            currentIndex: 0,
+            answers: new Array(40).fill(null), // Guarda índice de opción elegida (0-3) o null
+            flagged: new Array(40).fill(false),
+            timeLeft: 30 * 60, // 30 minutos en segundos (1800)
+            timerInterval: null,
+            isFinished: false,
+            reviewMode: 'single' // 'single' o 'all'
+        };
+
+        // ==========================================
+        // MANEJO DE INICIO DE SESIÓN
+        // ==========================================
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('applicant-name').value.trim();
+            const passInput = document.getElementById('applicant-password').value.trim();
+            const careerInput = document.getElementById('career-select').value;
+
+            if (!nameInput || !passInput || !careerInput) {
+                return;
+            }
+
+            userState.name = nameInput;
+            userState.career = careerInput;
+
+            // Actualizar encabezados con datos del postulante
+            document.getElementById('header-user-name').textContent = userState.name;
+            document.getElementById('mobile-user-name').textContent = userState.name;
+            document.getElementById('header-career-badge').textContent = `Carrera: ${userState.career}`;
+
+            // Cambiar de pantalla
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('exam-screen').classList.remove('hidden');
+            document.getElementById('exam-screen').classList.add('flex');
+
+            // Inicializar cuestionario y temporizador
+            initExam();
+        });
+
+        function initExam() {
+            examState.currentIndex = 0;
+            examState.answers = new Array(40).fill(null);
+            examState.flagged = new Array(40).fill(false);
+            examState.timeLeft = 30 * 60;
+            examState.isFinished = false;
+            examState.reviewMode = 'single';
+
+            renderNavGrid();
+            renderQuestion(0);
+            startTimer();
+        }
+
+        // ==========================================
+        // TEMPORIZADOR DE 30 MINUTOS
+        // ==========================================
+        function startTimer() {
+            clearInterval(examState.timerInterval);
+            updateTimerDisplay();
+
+            examState.timerInterval = setInterval(() => {
+                if (examState.isFinished) {
+                    clearInterval(examState.timerInterval);
+                    return;
+                }
+
+                examState.timeLeft--;
+                updateTimerDisplay();
+
+                if (examState.timeLeft <= 0) {
+                    clearInterval(examState.timerInterval);
+                    submitExam(true); // Envío automático al agotarse el tiempo
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(examState.timeLeft / 60);
+            const seconds = examState.timeLeft % 60;
+            const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            const timerDisplay = document.getElementById('timer-display');
+            timerDisplay.textContent = formatted;
+
+            // Alerta visual cuando quedan menos de 5 minutos
+            const timerBox = document.getElementById('timer-box');
+            if (examState.timeLeft <= 300 && !examState.isFinished) {
+                timerBox.classList.add('bg-red-100');
+            }
+        }
+
+        // ==========================================
+        // RENDERIZADO DE PREGUNTAS Y NAVEGACIÓN
+        // ==========================================
+        function renderNavGrid() {
+            const grid = document.getElementById('question-nav-grid');
+            grid.innerHTML = '';
+
+            questionsBank.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => {
+                    if (examState.isFinished && examState.reviewMode === 'all') {
+                        setReviewMode('single');
+                    }
+                    renderQuestion(idx);
+                };
+
+                // Clases base estilo cuadrícula Moodle
+                let classes = "nav-grid-btn relative h-9 w-full rounded text-xs font-bold border flex items-center justify-center ";
+
+                if (!examState.isFinished) {
+                    // Modo examen activo
+                    if (examState.answers[idx] !== null) {
+                        classes += "bg-gray-600 text-white border-gray-700 ";
+                    } else {
+                        classes += "bg-white text-gray-800 border-gray-400 ";
+                    }
+                } else {
+                    // Modo revisión finalizado
+                    const userAns = examState.answers[idx];
+                    if (userAns === q.correct) {
+                        classes += "bg-emerald-600 text-white border-emerald-700 ";
+                    } else if (userAns !== null && userAns !== q.correct) {
+                        classes += "bg-red-600 text-white border-red-700 ";
+                    } else {
+                        classes += "bg-gray-200 text-gray-700 border-gray-400 ";
+                    }
+                }
+
+                // Resaltar pregunta actual
+                if (idx === examState.currentIndex && (!examState.isFinished || examState.reviewMode === 'single')) {
+                    classes += "ring-2 ring-[#003366] ring-offset-1 ";
+                }
+
+                btn.className = classes;
+                btn.textContent = idx + 1;
+
+                // Triángulo rojo si está marcada
+                if (examState.flagged[idx]) {
+                    const flagDot = document.createElement('span');
+                    flagDot.className = "absolute top-0 right-0 w-0 h-0 border-t-[8px] border-t-red-600 border-l-[8px] border-l-transparent";
+                    btn.appendChild(flagDot);
+                }
+
+                grid.appendChild(btn);
+            });
+
+            // Actualizar contadores
+            const answeredCount = examState.answers.filter(a => a !== null).length;
+            document.getElementById('answered-counter').textContent = `${answeredCount} / 40`;
+            document.getElementById('mobile-progress-text').textContent = `${answeredCount}/40 respondidas`;
+        }
+
+        function renderQuestion(index) {
+            examState.currentIndex = index;
+            const q = questionsBank[index];
+            const userAnswer = examState.answers[index];
+
+            // Actualizar datos laterales
+            document.getElementById('q-number').textContent = q.id;
+            document.getElementById('footer-q-current').textContent = q.id;
+            document.getElementById('q-subject-badge').textContent = q.subject;
+
+            // Colores por materia
+            const badge = document.getElementById('q-subject-badge');
+            badge.className = "inline-block mt-2 px-2.5 py-0.5 rounded text-[11px] font-bold ";
+            if (q.subject === "Matemática") badge.className += "bg-blue-100 text-blue-900";
+            if (q.subject === "Historia") badge.className += "bg-amber-100 text-amber-900";
+            if (q.subject === "Psicología") badge.className += "bg-purple-100 text-purple-900";
+            if (q.subject === "Lenguaje") badge.className += "bg-emerald-100 text-emerald-900";
+
+            // Estado de pregunta
+            const statusText = document.getElementById('q-status-text');
+            if (!examState.isFinished) {
+                statusText.textContent = userAnswer !== null ? "Respuesta guardada" : "Sin responder aún";
+                statusText.className = userAnswer !== null ? "text-xs text-emerald-700 font-semibold mt-1" : "text-xs text-gray-600 mt-1";
+            } else {
+                if (userAnswer === q.correct) {
+                    statusText.textContent = "Correcta (2.50 / 2.50)";
+                    statusText.className = "text-xs text-emerald-700 font-bold mt-1";
+                } else if (userAnswer !== null) {
+                    statusText.textContent = "Incorrecta (0.00 / 2.50)";
+                    statusText.className = "text-xs text-red-700 font-bold mt-1";
+                } else {
+                    statusText.textContent = "Sin contestar (0.00 / 2.50)";
+                    statusText.className = "text-xs text-gray-600 font-bold mt-1";
+                }
+            }
+
+            // Estado de bandera
+            const flagIcon = document.getElementById('flag-icon');
+            const flagText = document.getElementById('flag-text');
+            if (examState.flagged[index]) {
+                flagIcon.className = "fa-solid fa-flag text-red-600";
+                flagText.textContent = "Quitar marca";
+                flagText.className = "text-red-600 font-semibold";
+            } else {
+                flagIcon.className = "fa-regular fa-flag";
+                flagText.textContent = "Marcar pregunta";
+                flagText.className = "";
+            }
+
+            // Enunciado
+            document.getElementById('q-text').textContent = q.question;
+
+            // Opciones
+            const optionsList = document.getElementById('options-list');
+            optionsList.innerHTML = '';
+            const letters = ['a', 'b', 'c', 'd'];
+
+            q.options.forEach((optText, optIdx) => {
+                const label = document.createElement('label');
+                let wrapperClasses = "flex items-start gap-3 p-3 rounded-lg border transition cursor-pointer select-none ";
+
+                if (!examState.isFinished) {
+                    if (userAnswer === optIdx) {
+                        wrapperClasses += "bg-blue-50 border-[#003366] ring-1 ring-[#003366]";
+                    } else {
+                        wrapperClasses += "bg-white border-gray-200 hover:bg-slate-50";
+                    }
+                } else {
+                    // Estilos en modo revisión
+                    wrapperClasses += "cursor-default ";
+                    if (optIdx === q.correct) {
+                        wrapperClasses += "bg-emerald-50 border-emerald-500 ring-1 ring-emerald-500";
+                    } else if (userAnswer === optIdx && userAnswer !== q.correct) {
+                        wrapperClasses += "bg-red-50 border-red-500 ring-1 ring-red-500";
+                    } else {
+                        wrapperClasses += "bg-white border-gray-200 opacity-75";
+                    }
+                }
+
+                label.className = wrapperClasses;
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `question_${q.id}`;
+                radio.value = optIdx;
+                radio.checked = userAnswer === optIdx;
+                radio.disabled = examState.isFinished;
+                radio.className = "mt-1 h-4 w-4 text-[#003366] focus:ring-[#003366]";
+
+                radio.onchange = () => {
+                    selectAnswer(optIdx);
+                };
+
+                const textSpan = document.createElement('span');
+                textSpan.className = "text-sm text-gray-800 flex-grow";
+                textSpan.innerHTML = `<strong class="mr-1.5 text-gray-700">${letters[optIdx]}.</strong> ${optText}`;
+
+                label.appendChild(radio);
+                label.appendChild(textSpan);
+
+                // Iconos de revisión (Check / X)
+                if (examState.isFinished) {
+                    const iconSpan = document.createElement('span');
+                    if (optIdx === q.correct) {
+                        iconSpan.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>';
+                    } else if (userAnswer === optIdx && userAnswer !== q.correct) {
+                        iconSpan.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-600 text-lg"></i>';
+                    }
+                    label.appendChild(iconSpan);
+                }
+
+                optionsList.appendChild(label);
+            });
+
+            // Mostrar/Ocultar caja de retroalimentación en revisión
+            const feedbackBox = document.getElementById('single-feedback-box');
+            const clearWrapper = document.getElementById('clear-choice-wrapper');
+
+            if (examState.isFinished) {
+                clearWrapper.classList.add('hidden');
+                feedbackBox.classList.remove('hidden');
+
+                const isCorrect = userAnswer === q.correct;
+                const correctLetter = letters[q.correct].toUpperCase();
+
+                if (isCorrect) {
+                    feedbackBox.className = "mt-5 p-4 rounded-lg border border-emerald-300 bg-[#e6f4ea] text-emerald-950 text-sm";
+                    feedbackBox.innerHTML = `
+                        <p class="font-bold flex items-center gap-1.5 text-emerald-800 mb-1">
+                            <i class="fa-solid fa-check-circle"></i> ¡Respuesta correcta!
+                        </p>
+                        <p class="text-xs leading-relaxed">${q.explanation}</p>
+                    `;
+                } else {
+                    feedbackBox.className = "mt-5 p-4 rounded-lg border border-amber-300 bg-[#fcf4e6] text-amber-950 text-sm";
+                    feedbackBox.innerHTML = `
+                        <p class="font-bold flex items-center gap-1.5 text-red-700 mb-1">
+                            <i class="fa-solid fa-xmark-circle"></i> ${userAnswer === null ? 'Pregunta sin responder.' : 'Respuesta incorrecta.'}
+                        </p>
+                        <p class="font-semibold text-gray-900 mb-1">La respuesta correcta es: <span class="text-emerald-800">${correctLetter}. ${q.options[q.correct]}</span></p>
+                        <p class="text-xs text-gray-700 leading-relaxed"><strong>Fundamento:</strong> ${q.explanation}</p>
+                    `;
+                }
+            } else {
+                feedbackBox.classList.add('hidden');
+                if (userAnswer !== null) {
+                    clearWrapper.classList.remove('hidden');
+                } else {
+                    clearWrapper.classList.add('hidden');
+                }
+            }
+
+            // Botones anterior / siguiente
+            document.getElementById('btn-prev').disabled = index === 0;
+            const btnNext = document.getElementById('btn-next');
+            if (index === questionsBank.length - 1) {
+                btnNext.innerHTML = examState.isFinished
+                    ? 'Finalizar revisión'
+                    : 'Terminar intento <i class="fa-solid fa-check ml-1"></i>';
+            } else {
+                btnNext.innerHTML = 'Siguiente página <i class="fa-solid fa-chevron-right ml-1"></i>';
+            }
+
+            renderNavGrid();
+        }
+
+        function selectAnswer(optIdx) {
+            if (examState.isFinished) return;
+            examState.answers[examState.currentIndex] = optIdx;
+            renderQuestion(examState.currentIndex);
+        }
+
+        function clearCurrentAnswer() {
+            if (examState.isFinished) return;
+            examState.answers[examState.currentIndex] = null;
+            renderQuestion(examState.currentIndex);
+        }
+
+        function toggleFlagCurrent() {
+            examState.flagged[examState.currentIndex] = !examState.flagged[examState.currentIndex];
+            renderQuestion(examState.currentIndex);
+        }
+
+        function prevQuestion() {
+            if (examState.currentIndex > 0) {
+                renderQuestion(examState.currentIndex - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (examState.currentIndex < questionsBank.length - 1) {
+                renderQuestion(examState.currentIndex + 1);
+            } else if (!examState.isFinished) {
+                openConfirmModal();
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ==========================================
+        // MODAL Y FINALIZACIÓN DEL EXAMEN
+        // ==========================================
+        function openConfirmModal() {
+            if (examState.isFinished) return;
+            const unansweredCount = examState.answers.filter(a => a === null).length;
+
+            document.getElementById('modal-title').textContent = "Confirmar envío y calificación";
+            if (unansweredCount > 0) {
+                document.getElementById('modal-message').innerHTML = `
+                    Aún tiene <strong class="text-red-600">${unansweredCount} pregunta(s) sin responder</strong>.<br><br>
+                    Una vez que haga el envío, no podrá cambiar sus respuestas y se calculará su nota sobre 100 puntos. ¿Desea finalizar?
+                `;
+            } else {
+                document.getElementById('modal-message').textContent =
+                    "Ha respondido las 40 preguntas. Una vez que envíe el cuestionario, se mostrará su calificación final sobre 100 puntos y la revisión detallada.";
+            }
+
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        function submitExam(isTimeUp) {
+            closeModal();
+            clearInterval(examState.timerInterval);
+            examState.isFinished = true;
+
+            // Calcular resultados (Cada pregunta vale 2.5 puntos -> 40 * 2.5 = 100)
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unansweredCount = 0;
+
+            questionsBank.forEach((q, idx) => {
+                const ans = examState.answers[idx];
+                if (ans === null) {
+                    unansweredCount++;
+                } else if (ans === q.correct) {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+            });
+
+            const finalScore = (correctCount / questionsBank.length) * 100;
+            // Criterio solicitado: menos de 51 es reprobado, arriba de 51 (o >= 51) aprobado
+            const isApproved = finalScore >= 51;
+
+            // Actualizar UI de estado finalizado
+            document.getElementById('finish-attempt-box').classList.add('hidden');
+            const modeInd = document.getElementById('mode-indicator');
+            modeInd.innerHTML = '<i class="fa-solid fa-flag-checkered mr-1"></i> Finalizado - Revisión';
+            modeInd.className = "font-semibold text-blue-800 bg-blue-50 px-2.5 py-1 rounded border border-blue-200";
+
+            if (isTimeUp) {
+                document.getElementById('timer-display').textContent = "00:00";
+            }
+
+            // Mostrar Banner de Calificación
+            const banner = document.getElementById('results-banner');
+            banner.classList.remove('hidden');
+
+            const statusBadge = document.getElementById('result-status-badge');
+            const resultTitle = document.getElementById('result-title');
+            const resultSubtitle = document.getElementById('result-subtitle');
+            const resultScoreEl = document.getElementById('result-score');
+
+            if (isApproved) {
+                banner.className = "moodle-card p-6 border-l-8 border-emerald-600 bg-white shadow-md";
+                statusBadge.textContent = "ESTADO: APROBADO";
+                statusBadge.className = "inline-block text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full mb-2 bg-emerald-100 text-emerald-800";
+                resultTitle.textContent = `¡Felicidades, ${userState.name}!`;
+                resultSubtitle.textContent = `Has aprobado el simulador PSA para la carrera de ${userState.career}.`;
+                resultScoreEl.className = "text-3xl font-extrabold text-emerald-700";
+            } else {
+                banner.className = "moodle-card p-6 border-l-8 border-[#cc0000] bg-white shadow-md";
+                statusBadge.textContent = "ESTADO: REPROBADO";
+                statusBadge.className = "inline-block text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full mb-2 bg-red-100 text-[#cc0000]";
+                resultTitle.textContent = `Resultado del Postulante: ${userState.name}`;
+                resultSubtitle.textContent = `No alcanzaste el puntaje mínimo (51 pts) para ${userState.career}. Revisa tus respuestas abajo para reforzar tus conocimientos.`;
+                resultScoreEl.className = "text-3xl font-extrabold text-[#cc0000]";
+            }
+
+            resultScoreEl.textContent = finalScore.toFixed(2);
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+            document.getElementById('stat-unanswered').textContent = unansweredCount;
+
+            // Actualizar pregunta actual en modo revisión
+            renderQuestion(examState.currentIndex);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // MODOS DE REVISIÓN (INDIVIDUAL O TODAS)
+        // ==========================================
+        function setReviewMode(mode) {
+            examState.reviewMode = mode;
+            const singleContainer = document.getElementById('single-question-container');
+            const paginationControls = document.getElementById('pagination-controls');
+            const allContainer = document.getElementById('all-questions-review-container');
+
+            const btnSingle = document.getElementById('btn-review-single');
+            const btnAll = document.getElementById('btn-review-all');
+
+            if (mode === 'single') {
+                singleContainer.classList.remove('hidden');
+                paginationControls.classList.remove('hidden');
+                allContainer.classList.add('hidden');
+
+                btnSingle.className = "px-4 py-2 rounded-lg text-sm font-semibold bg-[#003366] text-white shadow-sm";
+                btnAll.className = "px-4 py-2 rounded-lg text-sm font-semibold bg-white text-[#003366] border border-[#003366] hover:bg-blue-50";
+                renderQuestion(examState.currentIndex);
+            } else {
+                singleContainer.classList.add('hidden');
+                paginationControls.classList.add('hidden');
+                allContainer.classList.remove('hidden');
+
+                btnAll.className = "px-4 py-2 rounded-lg text-sm font-semibold bg-[#003366] text-white shadow-sm";
+                btnSingle.className = "px-4 py-2 rounded-lg text-sm font-semibold bg-white text-[#003366] border border-[#003366] hover:bg-blue-50";
+                renderAllQuestionsReview();
+            }
+            renderNavGrid();
+        }
+
+        function renderAllQuestionsReview() {
+            const container = document.getElementById('all-questions-review-container');
+            container.innerHTML = '';
+            const letters = ['a', 'b', 'c', 'd'];
+
+            questionsBank.forEach((q, idx) => {
+                const userAns = examState.answers[idx];
+                const isCorrect = userAns === q.correct;
+
+                const card = document.createElement('div');
+                card.className = "moodle-card overflow-hidden";
+
+                let statusBadge = '';
+                if (isCorrect) {
+                    statusBadge = `<span class="text-xs font-bold px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800"><i class="fa-solid fa-check mr-1"></i> Correcta (2.50/2.50)</span>`;
+                } else if (userAns !== null) {
+                    statusBadge = `<span class="text-xs font-bold px-2.5 py-0.5 rounded bg-red-100 text-red-800"><i class="fa-solid fa-xmark mr-1"></i> Incorrecta (0.00/2.50)</span>`;
+                } else {
+                    statusBadge = `<span class="text-xs font-bold px-2.5 py-0.5 rounded bg-gray-200 text-gray-700">Sin responder (0.00/2.50)</span>`;
+                }
+
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    let rowClass = "p-2.5 rounded border text-sm flex items-center justify-between ";
+                    let icon = "";
+
+                    if (optIdx === q.correct) {
+                        rowClass += "bg-emerald-50 border-emerald-500 font-medium text-emerald-950";
+                        icon = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                    } else if (userAns === optIdx && userAns !== q.correct) {
+                        rowClass += "bg-red-50 border-red-500 text-red-950";
+                        icon = '<i class="fa-solid fa-circle-xmark text-red-600"></i>';
+                    } else {
+                        rowClass += "bg-white border-gray-200 text-gray-600";
+                    }
+
+                    optionsHtml += `
+                        <div class="${rowClass}">
+                            <span><strong>${letters[optIdx]}.</strong> ${opt}</span>
+                            ${icon}
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="bg-[#f8f9fa] px-4 py-2.5 border-b border-gray-200 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-[#003366]">Pregunta ${q.id}</span>
+                            <span class="text-xs bg-blue-100 text-blue-900 font-semibold px-2 py-0.5 rounded">${q.subject}</span>
+                        </div>
+                        ${statusBadge}
+                    </div>
+                    <div class="bg-[#e7f3f5] px-4 py-3 border-b border-[#bce0e6] text-sm font-medium text-gray-900">
+                        ${q.question}
+                    </div>
+                    <div class="p-4 space-y-2">
+                        ${optionsHtml}
+                        <div class="mt-3 p-3 rounded bg-slate-50 border border-slate-200 text-xs text-gray-700">
+                            <strong class="text-[#003366]">Respuesta correcta: ${letters[q.correct].toUpperCase()}.</strong> ${q.explanation}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function restartSimulator() {
+            document.getElementById('results-banner').classList.add('hidden');
+            document.getElementById('finish-attempt-box').classList.remove('hidden');
+            document.getElementById('single-question-container').classList.remove('hidden');
+            document.getElementById('pagination-controls').classList.remove('hidden');
+            document.getElementById('all-questions-review-container').classList.add('hidden');
+
+            const modeInd = document.getElementById('mode-indicator');
+            modeInd.innerHTML = '<i class="fa-solid fa-pen-to-square mr-1"></i> En curso';
+            modeInd.className = "font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200";
+
+            document.getElementById('timer-box').classList.remove('bg-red-100');
+            initExam();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
